@@ -33,7 +33,7 @@ async function main() {
         : undefined;
 
     const app = express();
-    app.use(cors({ origin: "https://odysseiaticket.vercel.app/" }))
+    app.use(cors({ origin: "https://odysseiaticket.vercel.app/*" }))
     app.use(cookieParser());
 
     app.use('/.well-known', express.static(path.join(__dirname, 'public/.well-known')));
