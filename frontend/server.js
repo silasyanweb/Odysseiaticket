@@ -1,17 +1,17 @@
 import express from "express";
-import {installGlobals} from "@remix-run/node";
+import { installGlobals } from "@remix-run/node";
 import process from "process";
-import {createServer as viteServer} from "vite";
+import { createServer as viteServer } from "vite";
 import compression from "compression";
 import fs from "node:fs/promises";
 import sirv from "sirv";
 import cookieParser from "cookie-parser";
 import path from "node:path";
-import {fileURLToPath} from "node:url";
+import { fileURLToPath } from "node:url";
 import * as nodePath from "node:path";
 import * as nodeUrl from "node:url";
 import "dotenv/config";
-import {sitemapIndexHandler, sitemapEventsHandler, sitemapOrganizersHandler} from "./src/sitemap/proxy.js";
+import { sitemapIndexHandler, sitemapEventsHandler, sitemapOrganizersHandler } from "./src/sitemap/proxy.js";
 
 installGlobals();
 
@@ -33,6 +33,7 @@ async function main() {
         : undefined;
 
     const app = express();
+    app.use(cors({ origin: "https://odysseiaticket.vercel.app/" }))
     app.use(cookieParser());
 
     app.use('/.well-known', express.static(path.join(__dirname, 'public/.well-known')));
@@ -144,7 +145,7 @@ Sitemap: ${frontendUrl}/sitemap.xml
         return import(
             nodePath.isAbsolute(path) ? nodeUrl.pathToFileURL(path).toString() : path
         );
-        
+
     }
 }
 main();

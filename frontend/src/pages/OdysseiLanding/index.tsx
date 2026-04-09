@@ -373,6 +373,30 @@ export default function App() {
         backgroundColor: '#0d0a06'
       }}
     >
+      <style>{`
+        /* Personalização da Barra de Rolagem */
+        ::-webkit-scrollbar {
+          width: 10px;
+          height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #0d0a06;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #ef9f27;
+          border-radius: 5px;
+          border: 2px solid #0d0a06;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #ffb869;
+        }
+        
+        /* Firefox */
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: #ef9f27 #0d0a06;
+        }
+      `}</style>
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 border-b border-[#ef9f27]/30 bg-transparent dark:bg-[#1a1200]/90 backdrop-blur-md shadow-[0_4px_30px_rgba(239,159,39,0.05)]">
         <div className="flex justify-between items-center px-8 py-4 max-w-full">
@@ -543,7 +567,20 @@ export default function App() {
                         <img className={`w-full h-full object-cover grayscale group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700 ${artist.position || 'object-center'}`} src={artist.img} alt={artist.name} referrerPolicy="no-referrer" />
                       </div>
                       <h3 className="font-headline text-3xl text-on-surface mb-1">{artist.name}</h3>
-                      <p className="font-label text-primary text-[10px] md:text-xs uppercase tracking-widest mb-6">{artist.genre}</p>
+                      <p className="font-label text-primary text-[10px] md:text-xs uppercase tracking-widest mb-2">{artist.genre}</p>
+                      {artist.instagramUrl && (
+                        <a
+                          href={artist.instagramUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-white/30 hover:text-[#E1306C] transition-colors duration-300 mb-4 group/ig"
+                          title={`Instagram de ${artist.name}`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current drop-shadow-[0_0_4px_rgba(225,48,108,0)] group-hover/ig:drop-shadow-[0_0_6px_rgba(225,48,108,0.8)] transition-all duration-300" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                          <span className="font-label text-[9px] uppercase tracking-widest">Instagram</span>
+                        </a>
+                      )}
                       <div className="mt-auto w-full">
                         <DJSoundCloudPlayer url={artist.scUrl} artistId={artist.id} activeAudioId={activeAudioId} setActiveAudioId={setActiveAudioId} />
                       </div>
@@ -732,7 +769,19 @@ export default function App() {
                       <img className={`w-full h-full object-cover grayscale transition-all duration-500 ${artist.position || 'object-center'}`} src={artist.img} alt={artist.name} referrerPolicy="no-referrer" />
                     </div>
                     <h3 className="font-headline text-2xl text-on-surface mb-1">{artist.name}</h3>
-                    <p className="font-label text-primary text-[10px] uppercase tracking-widest">{artist.genre}</p>
+                    <p className="font-label text-primary text-[10px] uppercase tracking-widest mb-2">{artist.genre}</p>
+                    {artist.instagramUrl && (
+                      <a
+                        href={artist.instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-white/30 hover:text-[#E1306C] transition-colors duration-300 mt-1 group/ig"
+                        title={`Instagram de ${artist.name}`}
+                      >
+                        <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current drop-shadow-[0_0_4px_rgba(225,48,108,0)] group-hover/ig:drop-shadow-[0_0_6px_rgba(225,48,108,0.8)] transition-all duration-300" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        <span className="font-label text-[9px] uppercase tracking-widest">Instagram</span>
+                      </a>
+                    )}
                   </div>
                 ))}
               </div>
